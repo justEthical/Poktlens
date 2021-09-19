@@ -12,12 +12,14 @@ import 'package:lens/Screens/ImageCheck/imageCheck.dart';
 import 'package:path_provider/path_provider.dart';
 
 class CameraScreen extends StatefulWidget {
+  final cambloc;
+  CameraScreen(this.cambloc);
   @override
   _CameraScreenState createState() => _CameraScreenState();
 }
 
 class _CameraScreenState extends State<CameraScreen> {
-  CameraBloc _cameraBloc = CameraBloc();
+  CameraBloc _cameraBloc;
 
   double maxW, maxH;
   PictureController _pictureController = PictureController();
@@ -38,6 +40,7 @@ class _CameraScreenState extends State<CameraScreen> {
 
   @override
   Widget build(BuildContext context) {
+    _cameraBloc = widget.cambloc;
     //-------------------------------------Rotation Off---------------------------------------------//
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
@@ -210,11 +213,12 @@ class _CameraScreenState extends State<CameraScreen> {
                                         (context),
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                Slide("camera",_cameraBloc)));
+                                                Slide("camera", _cameraBloc)));
                                   },
                                   child: Image.file(
                                     File(_cameraBloc.selectedImageList[
-                                        _cameraBloc.selectedImageList.length - 1]),
+                                        _cameraBloc.selectedImageList.length -
+                                            1]),
                                     fit: BoxFit.cover,
                                   )))),
                 )

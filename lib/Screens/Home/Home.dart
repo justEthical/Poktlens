@@ -3,12 +3,15 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:lens/Bloc/CameraBloc.dart';
 import 'package:lens/Bloc/HomeScreenBloc.dart';
 import 'package:lens/Utils/FileSystemUtils.dart';
 import 'package:lens/Screens/CameraScreen/CameraScreen.dart';
 import 'package:lens/Screens/Home/CustomDrawer.dart';
 import 'package:lens/Screens/Home/HomeScreen.dart';
 import 'package:permission_handler/permission_handler.dart';
+
+import '../../Test.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -17,6 +20,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   HomeScreenBloc bloc = HomeScreenBloc();
+  CameraBloc cameraBloc = CameraBloc();
   FileSystemUtils fileSystemUtils = FileSystemUtils();
 
   @override
@@ -120,7 +124,7 @@ class _HomeState extends State<Home> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (ctx) => CameraScreen()));
+                                builder: (ctx) => CameraScreen(this.cameraBloc)));
                       },
                       child: Icon(
                         Icons.camera,
@@ -134,7 +138,12 @@ class _HomeState extends State<Home> {
                 ),
                 Container(
                     margin: EdgeInsets.only(right: 5),
-                    child: Icon(Icons.photo_rounded, color: Colors.white))
+                    child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (ctx) => Test(this.cameraBloc)));
+                        },
+                        child: Icon(Icons.photo_rounded, color: Colors.white)))
               ],
             )));
   }

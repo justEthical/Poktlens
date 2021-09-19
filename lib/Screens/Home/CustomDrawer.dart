@@ -128,7 +128,7 @@ class _CustomDrawerState extends State<CustomDrawer>
                       height: 100,
                       margin: EdgeInsets.all(10),
                       child: CircleAvatar(
-                          child: Image.asset("lib/Assets/user.png"))),
+                          child: Image.asset("lib/Assets/user.png")))
                 );
               },
             ),

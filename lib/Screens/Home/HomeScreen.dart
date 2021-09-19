@@ -36,20 +36,33 @@ class _HomeScreenState extends State<HomeScreen> {
     return FutureBuilder(
         future: widget.fileSys.checkExistingPdf(),
         builder: (ctx, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              if (widget.fileSys.pdfFiles.isEmpty) {
-                return Center(
-                  child: Text("There is no pdf Created yet"),
-                );
-              } else {
-                return Expanded(
-                  child: Container(
+          if (snapshot.connectionState == ConnectionState.done) {
+            if (widget.fileSys.pdfFiles.isEmpty) {
+              return Expanded(
+                child: Container(
+                  child: Center(
+                    child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text("There is no pdf Created yet",
+                            style: TextStyle(
+                              decoration: TextDecoration.none,
+                              fontSize: 20,
+                              color: Colors.black,
+                            ))),
+                  ),
+                ),
+              );
+            } else {
+              return Expanded(
+                child: Container(
                     margin: const EdgeInsets.only(bottom: 8),
-                      color: Colors.white,
-                      child: ListView.builder(
-                          itemCount: widget.fileSys.pdfFiles.length ?? 0,
-                          itemBuilder: (ctx, i) {
-                            return Card(
+                    color: Colors.white,
+                    child: ListView.builder(
+                        itemCount: widget.fileSys.pdfFiles.length ?? 0,
+                        itemBuilder: (ctx, i) {
+                          return Container(
+                            margin: EdgeInsets.only(bottom: 10),
+                            child: Card(
                                 margin: EdgeInsets.only(right: 15, left: 15),
                                 elevation: 5,
                                 child: GestureDetector(
@@ -65,15 +78,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                     child:
                                         Text(" ${widget.fileSys.fileName(i)}"),
                                   )),
-                                ));
-                          })),
-                );
-              }
-            } else {
-              return Center(child: CircularProgressIndicator(backgroundColor: Colors.blue));
+                                )),
+                          );
+                        })),
+              );
             }
+          } else {
+            return Center(
+                child: CircularProgressIndicator(backgroundColor: Colors.blue));
           }
-        );
+        });
   }
 
   // _oldList(){
@@ -123,6 +137,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                     icon: Icon(Icons.menu)),
               ),
+              Text('PoktLens',
+                  style: TextStyle(
+                      letterSpacing: 0.2,
+                      fontSize: 30,
+                      decoration: TextDecoration.none,
+                      color: Colors.black)),
               Card(
                   elevation: 5,
                   child: IconButton(onPressed: () {}, icon: Icon(Icons.search)))

@@ -274,7 +274,7 @@ class _SlideState extends State<Slide> {
     setState(() {});
     final doc = pw.Document();
     for (int i = 0;
-        i < widget.cameraBloc.currentProcessingImg.length - 1;
+        i < widget.cameraBloc.currentProcessingImg.length;
         i++) {
       final image = pw.MemoryImage(
         File(widget.cameraBloc.currentProcessingImg[i]).readAsBytesSync(),

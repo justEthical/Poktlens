@@ -32,6 +32,7 @@ dependencies:
   pdf: any
   flutter_image_compress: any
   photo_manager: any
+  logger: any
 
 
 
